@@ -48,6 +48,8 @@ This ensured bookmarks are private per authenticated user.
 Bookmarks were not syncing across tabs.
 I implemented Supabase realtime subscriptions using channel() and handled cleanup properly to avoid duplicate listeners.
 
+VERCEL LINK : https://smart-bookmark-app-lemon.vercel.app
+
 ⚙️ Setup
 git clone https://github.com/Jaya1718/smart-bookmark-app.git
 
