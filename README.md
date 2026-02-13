@@ -1,24 +1,39 @@
-# Smart Bookmark App
+Smart Bookmark App
 
-A simple web application to save, manage, and access your favorite links efficiently. Built using modern web technologies and Supabase for authentication and database management.
+A simple real-time bookmark manager built with Next.js (App Router) and Supabase.
 
-## Features
+ Features
+Google Sign-In (OAuth only)
+Add and delete bookmarks (Title + URL)
+Private bookmarks per user
+Real-time updates across tabs
+Deployed on Vercel
 
-- **Google Authentication**: Sign in easily using your Google account.
-- **Bookmark Management**: Add, view, edit, and delete bookmarks.
-- **Secure Storage**: Bookmarks are stored safely in Supabase with Row-Level Security (RLS).
-- **Responsive Design**: Works smoothly on desktop and mobile devices.
+🛠 Tech Stack
+Next.js (App Router)
+Supabase (Auth + Database + Realtime)
+Tailwind CSS
+Vercel
 
-## Tech Stack
+Challenges Faced & Solutions
+1. Google OAuth Setup
+Initially, login redirects were not working correctly.
+I fixed this by properly configuring redirect URLs in Supabase, Google Cloud Console, and Vercel environment variables.
 
-- **Frontend**: JavaScript (Next.js)
-- **Backend**: Supabase (Authentication + Database)
-- **Database**: Supabase 
-- **Version Control**: Git & GitHub
+2. Row-Level Security (RLS)
+At first, users could see all bookmarks.
+I enabled RLS and added policies using auth.uid() = user_id to make bookmarks private per user.
 
-## Setup Instructions
+3. Real-time Updates
+Bookmarks were not syncing across tabs.
+I implemented Supabase realtime subscriptions using channel() and handled cleanup properly.
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/Jaya1718/smart-bookmark-app.git
-   cd smart-bookmark-app
+Setup
+git clone https://github.com/Jaya1718/smart-bookmark-app.git
+cd smart-bookmark-app
+npm install
+npm run dev
+
+Create .env.local:
+NEXT_PUBLIC_SUPABASE_URL=your_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key
