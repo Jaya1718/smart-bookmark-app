@@ -25,14 +25,18 @@ Tailwind CSS
 Vercel
 
 🧠 Challenges Faced & Solutions
+
 1. Google OAuth Setup
+   
 
 Initially, login redirects were not working correctly.
+
 I fixed this by properly configuring redirect URLs in Supabase, Google Cloud Console, and Vercel environment variables.
 
 2. Row-Level Security (RLS)
 
 At first, users could see all bookmarks.
+
 I enabled RLS and added policies using:
 
 auth.uid() = user_id
@@ -46,8 +50,11 @@ I implemented Supabase realtime subscriptions using channel() and handled cleanu
 
 ⚙️ Setup
 git clone https://github.com/Jaya1718/smart-bookmark-app.git
+
 cd smart-bookmark-app
+
 npm install
+
 npm run dev
 
 Create a .env.local file:
