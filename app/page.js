@@ -10,40 +10,37 @@ export default function Home() {
   const [url, setUrl] = useState("");
 
   useEffect(() => {
-    const getSessionAndSubscribe = async () => {
-      const {
-        data: { user },
-      } = await supabase.auth.getUser();
+  const getSessionAndSubscribe = async () => {
+    const { data: { user } } = await supabase.auth.getUser();
 
-      if (user) {
-        setUser(user);
-        fetchBookmarks();
+    if (user) {
+      setUser(user);
+      fetchBookmarks();
 
-        const channel = supabase
-          .channel("realtime-bookmarks")
-          .on(
-            "postgres_changes",
-            {
-              event: "*",
-              schema: "public",
-              table: "bookmarks",
-              filter: `user_id=eq.${user.id}`,
-            },
-            () => {
-              fetchBookmarks();
-            }
-          )
-          .subscribe();
+      const channel = supabase
+        .channel("realtime-bookmarks")
+        .on(
+          "postgres_changes",
+          {
+            event: "*",
+            schema: "public",
+            table: "bookmarks",
+            filter: `user_id=eq.${user.id}`,
+          },
+          () => {
+            fetchBookmarks();
+          }
+        )
+        .subscribe();
 
-        return () => {
-          supabase.removeChannel(channel);
-        };
-      }
-    };
+      return () => {
+        supabase.removeChannel(channel);
+      };
+    }
+  };
 
-    getSessionAndSubscribe();
-  }, []);
-
+  getSessionAndSubscribe();
+}, []);
   const login = async () => {
     await supabase.auth.signInWithOAuth({
       provider: "google",
